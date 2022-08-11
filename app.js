@@ -96,6 +96,13 @@ finishGameButton.addEventListener('click', async () => {
 // on load . . .
 window.addEventListener('load', async () => {
     // display all past games (hint: call displayAllGames())
+    const games = await getGames();
+
+    if (games) {
+        pastGames = games;
+
+        displayAllGames();
+    }
 });
 
 function displayCurrentGameEl() {
