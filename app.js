@@ -14,12 +14,12 @@ const finishGameButton = document.getElementById('finish-game-button');
 const teamOneLabel = document.getElementById('team-one-name');
 const teamTwoLabel = document.getElementById('team-two-name');
 
-let currentGame = {
-    name1: '',
-    name2: '',
-    score1: 0,
-    score2: 0,
-};
+
+let name1 = '';
+let name2 = '';
+let score1 = 0;
+let score2 = 0;
+
 
 nameForm.addEventListener('submit', (e) => {
     // don't forget to prevent the default form behavior!
@@ -30,10 +30,6 @@ nameForm.addEventListener('submit', (e) => {
     const name1 = data.get('team-one');
     const name2 = data.get('team-two');
 
-    currentGame.name1 = name1;
-    currentGame.name2 = name2;
-
-    
     // reset the form values
     nameForm.requestFullscreen();
 
@@ -43,26 +39,34 @@ nameForm.addEventListener('submit', (e) => {
 
 teamOneAddButton.addEventListener('click', () => {
     // increment the current state for team one's score
-    
+    score1++;
+
     displayCurrentGameEl();
+    console.log('score1');
 });
 
 teamTwoAddButton.addEventListener('click', () => {
     // increment the current state for team two's score
-
+    score2++;
+    
     displayCurrentGameEl();
+    console.log('score2');
 });
 
 teamOneSubtractButton.addEventListener('click', () => {
     // decrement the current state for team one's score
+    score1--;
 
     displayCurrentGameEl();
+    console.log('score1-');
 });
 
 teamTwoSubtractButton.addEventListener('click', () => {
     // decrement the current state for team two's score
+    score2--;
 
     displayCurrentGameEl();
+    console.log('score2-');
 });
 
 finishGameButton.addEventListener('click', async () => {
