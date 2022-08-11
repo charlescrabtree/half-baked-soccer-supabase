@@ -14,26 +14,36 @@ const finishGameButton = document.getElementById('finish-game-button');
 const teamOneLabel = document.getElementById('team-one-name');
 const teamTwoLabel = document.getElementById('team-two-name');
 
-let name1 = '';
-let name2 = '';
-let score1 = 0;
-let score2 = 0;
+let currentGame = {
+    name1: '',
+    name2: '',
+    score1: 0,
+    score2: 0,
+};
 
 nameForm.addEventListener('submit', (e) => {
     // don't forget to prevent the default form behavior!
-
+    e.preventDefault();
     // get the name data from the form
-
+    const data = new FormData(nameForm);
     // set the state to this data from the form
+    const name1 = data.get('team-one');
+    const name2 = data.get('team-two');
 
+    currentGame.name1 = name1;
+    currentGame.name2 = name2;
+
+    
     // reset the form values
+    nameForm.requestFullscreen();
 
     displayCurrentGameEl();
+    console.log('name1 and name2')
 });
 
 teamOneAddButton.addEventListener('click', () => {
     // increment the current state for team one's score
-
+    
     displayCurrentGameEl();
 });
 

@@ -11,10 +11,10 @@ The table name in supabase is `games`
 
 The games are stored in the database using this data model:
 {
-   name1: ,
-   name2: ,
-   score1: ,
-   score2: ,
+    name1: ,
+    name2: ,
+    score1: ,
+    score2: ,
 }
 */
 
