@@ -3,7 +3,7 @@ import { renderGame } from './render-utils.js';
 
 const currentGameEl = document.getElementById('current-game-container');
 const pastGamesEl = document.getElementById('past-games-container');
-const logoutButton = document.getElementById('logout');
+// const logoutButton = document.getElementById('logout');
 
 const nameForm = document.getElementById('name-form');
 const teamOneAddButton = document.getElementById('team-one-add-button');
@@ -39,7 +39,6 @@ nameForm.addEventListener('submit', (e) => {
     nameForm.reset();
 
     displayCurrentGameEl();
-    console.log('name1 and name2');
 });
 
 teamOneAddButton.addEventListener('click', () => {
@@ -47,7 +46,6 @@ teamOneAddButton.addEventListener('click', () => {
     currentGame.score1++;
 
     displayCurrentGameEl();
-    console.log('score1');
 });
 
 teamTwoAddButton.addEventListener('click', () => {
@@ -55,7 +53,6 @@ teamTwoAddButton.addEventListener('click', () => {
     currentGame.score2++;
     
     displayCurrentGameEl();
-    console.log('score2');
 });
 
 teamOneSubtractButton.addEventListener('click', () => {
@@ -63,7 +60,6 @@ teamOneSubtractButton.addEventListener('click', () => {
     currentGame.score1--;
 
     displayCurrentGameEl();
-    console.log('score1-');
 });
 
 teamTwoSubtractButton.addEventListener('click', () => {
@@ -71,26 +67,23 @@ teamTwoSubtractButton.addEventListener('click', () => {
     currentGame.score2--;
 
     displayCurrentGameEl();
-    console.log('score2-');
 });
 
 finishGameButton.addEventListener('click', async () => {
-    //await createGame(currentGame);
-    // create a new game using the current game state
-    //const games = await getGames();
+    await createGame(currentGame);
+    
+    const games = await getGames();
 
-    pastGames.push(currentGame);
+    pastGames = games;
 
     displayAllGames();
-    // after creating this new game, re-fetch the games to get the updated state and display them (hint: call displayAllGames())
-    currentGame = {
-        name1: '',
-        name2: '',
-        score1: 0,
-        score2: 0,
-    };
+
+    currentGame.name1 = '';
+    currentGame.name2 = '';
+    currentGame.score1 = 0;
+    currentGame.score2 = 0;
     displayCurrentGameEl();
-    console.log('finishgame');
+    
 });
 
 // on load . . .
@@ -122,12 +115,10 @@ function displayAllGames() {
     // clear out the past games list in the DOM
     pastGamesEl.textContent = '';
     // FETCH ALL GAMES from supabase
+    getGames();
     // loop through the past games
     for (let game of pastGames) {
         const gameEl = renderGame(game);
-
-        gameEl.classList.add('past');
-
         pastGamesEl.append(gameEl);
     }
     // render and append a past game for each past game in state
